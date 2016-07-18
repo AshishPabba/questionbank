@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "408998355932",
+    "firebase_url": "https://questionbank-74128.firebaseio.com",
+    "project_id": "questionbank-74128",
+    "storage_bucket": "questionbank-74128.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408998355932:android:b8a654d407522b1f",
+        "android_client_info": {
+          "package_name": "com.inkriti.questionbank"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408998355932-muaanpkv61km5q1eb71dm5sg2mg26rkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqQKTA9PSWIYGmL_zEd7QPARCcTLEL54k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
