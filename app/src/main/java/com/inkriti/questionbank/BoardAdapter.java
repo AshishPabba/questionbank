@@ -1,6 +1,7 @@
 package com.inkriti.questionbank;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
@@ -83,9 +84,9 @@ public class BoardAdapter extends BaseAdapter {
             @Override
             public void onClick(View v){
                 Snackbar.make(v, b.name + " Board was clicked", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-//                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-//                intent.putExtra("board.id", b.id);
-//                v.getContext().startActivity(intent);
+                Intent intent = new Intent(v.getContext(), SearchActivity.class);
+                intent.putExtra("board.id", b.id);
+                v.getContext().startActivity(intent);
 
             }
         });

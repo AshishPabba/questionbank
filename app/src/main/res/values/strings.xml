@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuestionBank</string>
+    <string name="title_activity_main">Landing page</string>
+    <string name="title_activity_search">SearchActivity</string>
 </resources>

@@ -13,5 +13,8 @@ public class MainActivity extends AppCompatActivity {
 
         GridView boardsGridview = (GridView) findViewById(R.id.boardsGridView);
         boardsGridview.setAdapter(new BoardAdapter(this));
+
+        GridView subjectsGridView = (GridView) findViewById(R.id.subjectsGridView);
+        subjectsGridView.setAdapter(new SubjectAdapter(this));
     }
 }
