@@ -2,4 +2,9 @@
     <string name="app_name">QuestionBank</string>
     <string name="title_activity_main">Landing page</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string-array
+        name="MenuOptions">
+        <item
+            >text_string</item>
+    </string-array>
 </resources>
