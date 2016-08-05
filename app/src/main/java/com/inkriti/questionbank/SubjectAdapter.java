@@ -1,12 +1,13 @@
 package com.inkriti.questionbank;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,19 +23,22 @@ import java.util.ArrayList;
  */
 public class SubjectAdapter extends BaseAdapter {
     private Context mContext;
+    private Boolean isForm = false;
 
 
     public ArrayList<Subject> subjects;
     private DatabaseReference  mDatabase;
     public SubjectAdapter that;
 
-    public SubjectAdapter(Context c){
+    public SubjectAdapter(Context c, Boolean isForm){
         mContext = c;
+        this.isForm = isForm;
+
         this.subjects = new ArrayList<Subject>();
         this.that = this;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        Log.i("SAdapter", "Before event attachment");
         mDatabase.child("subjects").addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
@@ -56,6 +60,7 @@ public class SubjectAdapter extends BaseAdapter {
                 });
     }
     public int getCount(){
+        Log.i("Subject getCount", String.valueOf(subjects.size()));
         return subjects.size();
     }
     public Object getItem(int position) {
@@ -67,10 +72,18 @@ public class SubjectAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(this.isForm){
+            return this.getCheckbox(position, convertView, parent);
+        }else{
+            return this.getTextView(position, convertView, parent);
+        }
+    }
+
+    public View getTextView(int position, View convertView, ViewGroup parent){
         TextView textView;
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            textView = new TextView(mContext);
-            textView.setPadding(8, 8, 8, 8);
+            textView = (TextView) inflater.inflate(R.layout.item, null);
         }else{
             textView = (TextView) convertView;
         }
@@ -81,14 +94,41 @@ public class SubjectAdapter extends BaseAdapter {
             @Override
             public void onClick(View v){
                 Snackbar.make(v, o.name + " Subject was clicked", Snackbar.LENGTH_LONG).show();
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("subject.id", o.id);
-                v.getContext().startActivity(intent);
+                ((MainActivity)that.mContext).setSelected("subject", o.id);
 
             }
         });
 
         return textView;
+    }
+
+    public View getCheckbox(int position, View convertView, ViewGroup parent){
+        final CheckBox checkBox;
+        if (convertView == null) {
+            checkBox = new CheckBox(mContext);
+            checkBox.setPadding(8, 8, 8, 8);
+        }else{
+            checkBox = (CheckBox) convertView;
+        }
+        final Subject o = subjects.get(position);
+        checkBox.setText(o.name);
+        if(((AddQuestionActivity)that.mContext).isSubjectSelected(o.id)) {
+            checkBox.setChecked(true);
+        }
+
+
+        checkBox.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String c;
+                c = checkBox.isChecked() ? "Checked": "UnChecked";
+                Snackbar.make(v, o.id + " Subject was " + c, Snackbar.LENGTH_LONG).show();
+                ((AddQuestionActivity)that.mContext).selectSubjects(o.id, checkBox.isChecked());
+
+            }
+        });
+
+        return checkBox;
     }
 
 }

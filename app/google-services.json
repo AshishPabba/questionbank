@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "408998355932",
-    "firebase_url": "https://questionbank-74128.firebaseio.com",
-    "project_id": "questionbank-74128",
-    "storage_bucket": "questionbank-74128.appspot.com"
+    "project_number": "1082113428778",
+    "firebase_url": "https://test1-12775.firebaseio.com",
+    "project_id": "test1-12775",
+    "storage_bucket": "test1-12775.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:408998355932:android:b8a654d407522b1f",
+        "mobilesdk_app_id": "1:1082113428778:android:bef530fc6f9310b6",
         "android_client_info": {
-          "package_name": "com.inkriti.questionbank"
+          "package_name": "com.example.user.helloworld"
         }
       },
       "oauth_client": [
         {
-          "client_id": "408998355932-muaanpkv61km5q1eb71dm5sg2mg26rkr.apps.googleusercontent.com",
+          "client_id": "1082113428778-fc5cvn2s9ojma74ni92pebne4gno3has.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqQKTA9PSWIYGmL_zEd7QPARCcTLEL54k"
+          "current_key": "AIzaSyDb_Nx995MuLCnCoYT0xnN9u2Sf1u_hobg"
         }
       ],
       "services": {

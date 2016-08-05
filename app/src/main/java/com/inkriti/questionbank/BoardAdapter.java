@@ -1,12 +1,13 @@
 package com.inkriti.questionbank;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +23,17 @@ import java.util.ArrayList;
  */
 public class BoardAdapter extends BaseAdapter {
     private Context mContext;
-
+    private Boolean isForm = false;
 
     public ArrayList<Board> boards;
     private DatabaseReference  mDatabase;
     public BoardAdapter that;
 
-    public BoardAdapter(Context c){
+    public BoardAdapter(Context c, Boolean isForm){
         mContext = c;
         this.boards = new ArrayList<Board>();
         this.that = this;
+        this.isForm = isForm;
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -47,7 +49,11 @@ public class BoardAdapter extends BaseAdapter {
                         }
                         Log.i("Adapter:cns:loaded", String.valueOf(boards.size()));
                         that.notifyDataSetChanged();
-                        // that.notifyDataSetChanged();
+                        try {
+                            ((MainActivity) that.mContext).showProgress(false);
+                        }catch(Exception e){
+
+                        }
                     }
 
                     @Override
@@ -68,30 +74,63 @@ public class BoardAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(this.isForm){
+            return this.getCheckbox(position, convertView, parent);
+        }else{
+            return this.getTextView(position, convertView, parent);
+        }
+    }
+
+    public View getTextView(int position, View convertView, ViewGroup parent){
         TextView textView;
+        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         if (convertView == null) {
-            textView = new TextView(mContext);
-            textView.setPadding(8, 8, 8, 8);
+            textView = (TextView) inflater.inflate(R.layout.item, null);
+            //textView = new TextView(mContext);
         }else{
             textView = (TextView) convertView;
         }
-        final Board b = boards.get(position);
-        textView.setText(b.name);
+        final Board o = boards.get(position);
+        textView.setText(o.name);
 
-        //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
         textView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Snackbar.make(v, b.name + " Board was clicked", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                Intent intent = new Intent(v.getContext(), SearchActivity.class);
-                intent.putExtra("board.id", b.id);
-                v.getContext().startActivity(intent);
+                Snackbar.make(v, o.name + " Board was clicked", Snackbar.LENGTH_LONG).show();
+                ((MainActivity)that.mContext).setSelected("board", o.id);
 
             }
         });
 
         return textView;
+    }
+
+    public View getCheckbox(int position, View convertView, ViewGroup parent){
+        final CheckBox checkBox;
+        if (convertView == null) {
+            checkBox = new CheckBox(mContext);
+            checkBox.setPadding(8, 8, 8, 8);
+        }else{
+            checkBox = (CheckBox) convertView;
+        }
+        final Board o = boards.get(position);
+        checkBox.setText(o.name);
+        if(((AddQuestionActivity)that.mContext).isBoardSelected(o.id)) {
+            checkBox.setChecked(true);
+        }
+
+        checkBox.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                String c;
+                c = checkBox.isChecked() ? "Checked": "UnChecked";
+                Snackbar.make(v, o.id + " Board was " + c, Snackbar.LENGTH_LONG).show();
+                ((AddQuestionActivity)that.mContext).selectBoards(o.id, checkBox.isChecked());
+
+            }
+        });
+
+        return checkBox;
     }
 
 }

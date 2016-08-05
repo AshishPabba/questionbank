@@ -1,4 +1,4 @@
-package com.inkriti.questionbank;
+package com.example.user.helloworld;
 
 import org.junit.Test;
 

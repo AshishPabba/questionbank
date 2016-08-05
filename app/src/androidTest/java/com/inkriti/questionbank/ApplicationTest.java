@@ -1,4 +1,4 @@
-package com.inkriti.questionbank;
+package com.example.user.helloworld;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,15 +1,12 @@
 package com.inkriti.questionbank;
-
-/**
- * Created by vidha on 18-07-2016.
- */
-
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Created by User on 14 July 2016.
+ */
 public class Subject {
     public String id;
     public String name;

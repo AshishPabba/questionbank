@@ -1,10 +1,13 @@
 <resources>
-    <string name="app_name">QuestionBank</string>
-    <string name="title_activity_main">Landing page</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string-array
-        name="MenuOptions">
-        <item
-            >text_string</item>
-    </string-array>
+    <string name="app_name">Question Bank</string>
+    <string name="title_activity_main">Question Bank</string>
+    <string name="title_activity_search">Questions</string>
+    <string name="title_activity_add_question">Add Question</string>
+    <string name="title_activity_update_question">Update Question</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
 </resources>
